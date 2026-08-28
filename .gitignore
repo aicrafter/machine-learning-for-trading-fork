@@ -230,3 +230,4 @@ case_studies/*/catalog/*.json
 
 # generated preview fixtures (tests/generate_intermediates.py)
 case_studies/.preview/
+Machine_Learning_for_Trading_Jansen_3ed.pdf
