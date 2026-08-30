@@ -402,10 +402,17 @@
 11_ml_pipeline/04_nested_cv_hpo:
   parameters:
     ALPHA_GRID_POINTS: 10
-    MAX_SYMBOLS: 10
+    # Not 10. This notebook's only metric is a cross-sectional IC, which
+    # utils.modeling.cross_sectional_ic_mean leaves undefined on a date priced by
+    # fewer than ten entities. On the first ten ETFs by symbol the expanding
+    # walk-forward folds carry 3, 9 and at most 10 names per date, so folds 1 and 2
+    # had no date with a defined IC at all and fold 3 had 33 of 200 - every number
+    # the run reported came from a substitute value, not a measurement. Twenty-five
+    # is the first width at which all three folds carry 200 of 200 defined dates.
+    MAX_SYMBOLS: 25
     N_SPLITS: 3
     N_TRIALS: 5
-  timeout: 360
+  timeout: 600
 11_ml_pipeline/05_shap_analysis:
   parameters:
     MAX_CV_FOLDS: 2
@@ -1785,6 +1792,20 @@ case_studies/nasdaq100_microstructure/12_causal_dml:
     N_PLACEBO: 25
   timeout: 120
 case_studies/nasdaq100_microstructure/13_model_analysis:
+  parameters:
+    # The fixture publishes its populations under a `-fixture-` prefix rather than the case
+    # study's own names, and it has to: `OfficialPopulation.create` matches on the member list,
+    # so a modelling notebook publishing its own newly-fitted hashes under a name the fixture
+    # had frozen is refused outright. The prefix is what lets the fixture's declarations and a
+    # notebook's own coexist, so the notebook is pointed at the fixture's names here instead.
+    #
+    # Inert until the fixture actually seeds populations: today every seeded registry holds an
+    # empty `official_populations`, so `declared_population_members` takes its "this registry
+    # declares none" branch and never resolves either name. Verified against that state rather
+    # than assumed. Landing it early is the safe order - the reverse, seeding before the names
+    # are here, makes the notebook refuse a family it cannot check.
+    LINEAR_POPULATION: nasdaq100_microstructure-fixture-linear-validation-v1
+    GBM_POPULATION: nasdaq100_microstructure-fixture-gbm-validation-v1
   timeout: 300
 case_studies/nasdaq100_microstructure/14_backtest:
   parameters:
