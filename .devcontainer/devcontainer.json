@@ -1,0 +1,25 @@
+{
+  "name": "Claude Code Dev Environment",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code"
+      ]
+    }
+  },
+
+  // Bump this in your GitHub Codespaces settings (github.com/settings/codespaces)
+  // if you want a longer default idle timeout for Claude Code sessions.
+
+  "remoteUser": "vscode"
+}
