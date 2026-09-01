@@ -20,14 +20,15 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  schedule:
-    - cron: '0 6 * * 1'   # Monday 06:00 UTC
-  pull_request:
-    branches: [main]
-    paths:
-      - 'docker-compose.yml'
-      - 'envs/**'
-      - '.github/workflows/container-smoke.yml'
+  # Automated triggers disabled at user request (2026-09-01) — manual dispatch only.
+  # schedule:
+  #   - cron: '0 6 * * 1'   # Monday 06:00 UTC
+  # pull_request:
+  #   branches: [main]
+  #   paths:
+  #     - 'docker-compose.yml'
+  #     - 'envs/**'
+  #     - '.github/workflows/container-smoke.yml'
   workflow_dispatch:
 
 jobs:

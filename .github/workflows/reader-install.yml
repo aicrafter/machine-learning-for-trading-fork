@@ -34,22 +34,23 @@ name: Reader install
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 5 * * 1'   # Weekly Monday 5 AM UTC, ahead of the Tests cron
-  pull_request:
-    # Everything the walk actually touches, so a change to any of it is re-walked.
-    paths:
-      - 'pyproject.toml'
-      - 'uv.lock'
-      - '.env.example'
-      - 'sitecustomize.py'
-      - 'docs/installation.md'
-      - 'README.md'
-      - 'data/**'
-      - 'utils/**.py'
-      - 'scripts/verify_installation.py'
-      - '01_process_is_edge/factor_regimes.py'
-      - '.github/workflows/reader-install.yml'
+  # Automated triggers disabled at user request (2026-09-01) — manual dispatch only.
+  # schedule:
+  #   - cron: '0 5 * * 1'   # Weekly Monday 5 AM UTC, ahead of the Tests cron
+  # pull_request:
+  #   # Everything the walk actually touches, so a change to any of it is re-walked.
+  #   paths:
+  #     - 'pyproject.toml'
+  #     - 'uv.lock'
+  #     - '.env.example'
+  #     - 'sitecustomize.py'
+  #     - 'docs/installation.md'
+  #     - 'README.md'
+  #     - 'data/**'
+  #     - 'utils/**.py'
+  #     - 'scripts/verify_installation.py'
+  #     - '01_process_is_edge/factor_regimes.py'
+  #     - '.github/workflows/reader-install.yml'
 
 concurrency:
   group: reader-install-${{ github.ref }}

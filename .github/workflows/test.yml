@@ -35,15 +35,16 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  pull_request:
-    branches: [main]
-  push:
-    branches: [main]
-  schedule:
-    - cron: '0 6 * * 1'   # Weekly Monday 6 AM UTC
-  workflow_run:
-    workflows: ["Docker Publish"]
-    types: [completed]
+  # Automated triggers disabled at user request (2026-09-01) — manual dispatch only.
+  # pull_request:
+  #   branches: [main]
+  # push:
+  #   branches: [main]
+  # schedule:
+  #   - cron: '0 6 * * 1'   # Weekly Monday 6 AM UTC
+  # workflow_run:
+  #   workflows: ["Docker Publish"]
+  #   types: [completed]
   workflow_dispatch:
     inputs:
       run_all:
