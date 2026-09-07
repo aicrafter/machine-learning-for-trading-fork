@@ -19,8 +19,9 @@
 name: README Offerings
 
 on:
-  schedule:
-    - cron: '0 7 * * *'   # daily 07:00 UTC
+  # Automated triggers disabled at user request (2026-09-07) — manual dispatch only.
+  # schedule:
+  #   - cron: '0 7 * * *'   # daily 07:00 UTC
   workflow_dispatch:
 
 permissions:

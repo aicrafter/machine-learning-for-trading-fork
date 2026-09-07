@@ -20,8 +20,9 @@
 name: Weekly External
 
 on:
-  schedule:
-    - cron: '0 6 * * 1'   # Monday 06:00 UTC
+  # Automated triggers disabled at user request (2026-09-07) — manual dispatch only.
+  # schedule:
+  #   - cron: '0 6 * * 1'   # Monday 06:00 UTC
   workflow_dispatch:
     inputs:
       test_filter:
